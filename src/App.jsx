@@ -1,12 +1,15 @@
 import React  from "react";
 import './index.css';
-import Navbar from "./components/Navbar";
+import { Navbar, Hero, Main, Footer, Carousel } from "./components";
 
 
 const App = () => 
     (
         <>
             <Navbar/>
+            <Hero/>
+            <Main/>
+            <Footer/>
         </>
     )
 
