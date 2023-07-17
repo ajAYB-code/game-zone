@@ -1,13 +1,9 @@
 
 /* Custom CSS for the game card component */
 
-:root{
-    --nbr-items-visible-carousel-lg: 5;
-    --carousel-item-margin-right: 15px;
-}
-.game-card .game-title{
-    --font-size: 18px;
-    --line-height: 1.2;
+.hero .game-title{
+    --font-size: 30px;
+    --line-height: 1.21;
     --number-of-lines: 2;
     font-size: var(--font-size);
     line-height: var(--line-height);
@@ -16,6 +12,6 @@
     display: -webkit-box;
     height: calc(var(--font-size) * var(--line-height) * var(--number-of-lines));
     text-overflow: ellipsis;
-    word-wrap: break-word;
+    word-wrap:break-word;
     overflow: hidden;
 }
