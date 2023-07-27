@@ -7,9 +7,9 @@ import './Carousel.css';
 const Carousel = ({ games }) => {
     const [slideNumber, setSlideNumber] = useState(0);
     const itemsPerPage = 5;
-
+    
     const slide = (direct) => {
-        setSlideNumber(slideNumber + (direct == -1 ? 1 : -1));
+        setSlideNumber(slideNumber + direct * -1);
     }
 
     return (
@@ -27,7 +27,13 @@ const Carousel = ({ games }) => {
         </button>
         <button 
         onClick={ () => { slide(-1) } }
-        className="group bg-black shadow-xl border-2 p-4 flex rounded-full absolute z-10 right-0 top-1/2 -translate-y-1/2 translate-x-1/3 hover:border-secondary">
+        className="group bg-black shadow-xl border-2 p-4 flex rounded-full absolute z-10 right-0 top-1/2 -translate-y-1/2 translate-x-1/3 hover:border-secondary"
+        style={{
+            ...games.length - slideNumber * itemsPerPage > itemsPerPage ?
+            {visibility: 'visible'} : 
+            {visibility: 'hidden'}
+        }}
+        >
             <BiSolidChevronRight className="group-hover:text-secondary"/>
         </button>
         <div className="overflow-hidden">

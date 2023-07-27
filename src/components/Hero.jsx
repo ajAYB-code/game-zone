@@ -63,10 +63,10 @@ const Hero = () => {
                     <div className="basis-1/2 min-w-0 gap-y-6">
                         <h1 className="game-title font-semibold mb-3">{ heroGame.name }</h1>
                         <div className="text-slate-100 mb-5">
-                            <span className>{ heroGame.released }</span>
+                            <span className="">{ heroGame.released }</span>
                         </div>
                         <div className="">
-                            <button className="px-6 py-3 border-none outline-none bg-primary text-white rounded-md ">See this game</button>
+                            <button className="px-6 py-3 border-none outline-none bg-primary text-white rounded-md">See this game</button>
                         </div>
                     </div>
                     <ul className="flex flex-row gap-x-4">
@@ -79,7 +79,7 @@ const Hero = () => {
                             (
                             <li 
                             key={index}
-                            className="">
+                            >
                                 <img src={ screenshot.image } className={"h-20 w-36 obect-cover rounded " + (activeScreenShotIndex == index ? 'ring ring-secondary' : '') } alt="" />
                             </li>
                             )    
