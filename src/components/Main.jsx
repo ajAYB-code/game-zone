@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Carousel } from "./";
 import { fetchGames } from "../api";
 
@@ -75,21 +76,21 @@ const Main = () => {
             <section className="pt-16">
                 <div className="flex flex-row justify-between items-end mb-12">
                     <h1 className="text-4xl font-bold text-primary">New Release</h1>
-                    <a href="" className="text-secondary text-lg">See more</a>
+                    <Link to={"/games?sort=new"} className="text-secondary text-lg">See more</Link>
                 </div>
                 <Carousel games={newReleasedGames}/>
             </section>
             <section className="pt-16">
                 <div className="flex flex-row justify-between items-end mb-12">
                     <h1 className="text-4xl font-bold text-primary">Trending</h1>
-                    <a href="" className="text-secondary text-lg">See more</a>
+                    <Link to={"/games?sort=trend"} className="text-secondary text-lg">See more</Link>
                 </div>
                 <Carousel games={trendingGames}/>
             </section>
             <section className="pt-16">
                 <div className="flex flex-row justify-between items-end mb-12">
                     <h1 className="text-4xl font-bold text-primary">Highly Rated</h1>
-                    <a href="" className="text-secondary text-lg">See more</a>
+                    <Link to={"/games?sort=rate"} className="text-secondary text-lg">See more</Link>
                 </div>
                 <Carousel games={highRatedGames}/>
             </section>

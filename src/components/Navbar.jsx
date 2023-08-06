@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { BsSearch } from 'react-icons/bs'
 
@@ -39,7 +40,7 @@ const Navbar = () => {
 
     return (
         <nav className="p-7 flex items-center">
-            <a href="/" className="text-white font-bold text-3xl">Game <span className="text-primary">Zone</span></a>
+            <Link to={"/"} className="text-white font-bold text-3xl">Game <span className="text-primary">Zone</span></Link>
             <div className="flex w-[450px] ml-10 rounded-full focus-within:ring focus-within:ring-primary">
                 <div className="relative z-10">
                     <div
