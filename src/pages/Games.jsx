@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Footer, GameCard, Navbar } from "../components";
+import { Footer, GameCard, GameCardSkeleton, Navbar } from "../components";
 import { fetchGames } from "../api";
 import { useFetcher, useNavigate, useSearchParams } from "react-router-dom";
 import { BiSolidHandLeft } from "react-icons/bi";
 
 const Games = () => {
     const [games, setGames] = useState([]);
+    const [areGamesLoading, setAreGamesLoading] = useState(false);
     const navigate = useNavigate();
     const [searchParams, setSearchParams] = useSearchParams();
     const [sortGamesBy, setSortGamesBy] = useState(searchParams.get('sort') || '');
+    const gamesPerPage = 20;
+    const shadowLoadingGameCards = [];
 
     const loadGames = async () => {
         const fetchGamesParams = {};
@@ -23,8 +26,11 @@ const Games = () => {
             fetchGamesParams['ordering'] = '-rating';
             break;
         }
+        setAreGamesLoading(true);
         const data = await fetchGames(fetchGamesParams);
         setGames(data.results);
+        setAreGamesLoading(false);
+        console.log(data.results);
     }
 
     useEffect(() => {
@@ -63,9 +69,13 @@ const Games = () => {
                             <option value="rate">Rating</option>
                         </select>
                     </div>
-                    <ul className="grid grid-cols-5 gap-10">
-                    {
-                        games.map((game, index) =>
+                    <ul className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10">
+                        {
+                        areGamesLoading && <GameCardSkeleton count={gamesPerPage} />
+                        }
+                        {
+                        !areGamesLoading && 
+                            games.map((game, index) =>
                             (
                                 <li
                                 key={index}
@@ -77,7 +87,8 @@ const Games = () => {
                                 </li>
                             )
                         )
-                    }
+                        }
+                        
                     </ul>
                     <div className="mt-16">
                     <ul className="flex gap-x-3">

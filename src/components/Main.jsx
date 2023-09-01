@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Carousel } from "./";
+import { Carousel, LoadingAnimation } from "./";
 import { fetchGames } from "../api";
 
 const Main = () => {
     const [newReleasedGames, setNewReleasedGames] = useState([]);
     const [trendingGames, setTrendingGames] = useState([]);
     const [highRatedGames, setHighRatedGames] = useState([]);
+    const [isNewReleasedGamesLoading, setIsNewReleasedGamesLoading] = useState(false);
+    const [isTrendingGamesLoading, setIsTrendingGamesLoading] = useState(false);
+    const [isHighRatedGamesLoading, setIsHighRatedGamesLoading] = useState(false);
 
     const loadNewReleasedGames = async () => {
         const todayDate = new Date();
@@ -22,9 +25,10 @@ const Main = () => {
             dates: startDate + ',' + endDate,
             ordering: '-released',
         }
-
+        setIsNewReleasedGamesLoading(true);
         const data = await fetchGames(params);
         setNewReleasedGames(data.results);
+        setIsNewReleasedGamesLoading(false);
     }
 
     const loadTrendingGames = async () => {
@@ -41,9 +45,10 @@ const Main = () => {
             dates: startDate + ',' + endDate,
             ordering: '-added',
         }
-
+        setIsTrendingGamesLoading(true);
         const data = await fetchGames(params);
         setTrendingGames(data.results);
+        setIsTrendingGamesLoading(false);
     }
 
     const loadHighRatedGames = async () => {
@@ -60,8 +65,9 @@ const Main = () => {
             dates: startDate + ',' + endDate,
             ordering: '-rating',
         }
-
+        setIsHighRatedGamesLoading(true);
         const data = await fetchGames(params);
+        setIsHighRatedGamesLoading(false);
         setHighRatedGames(data.results);
     }
 
@@ -78,21 +84,48 @@ const Main = () => {
                     <h1 className="text-4xl font-bold text-primary">New Release</h1>
                     <Link to={"/games?sort=new"} className="text-secondary text-lg">See more</Link>
                 </div>
+                {
+                isNewReleasedGamesLoading && 
+                <div className="py-8 ">
+                    <LoadingAnimation/>
+                </div>
+                }
+                {
+                !isNewReleasedGamesLoading &&
                 <Carousel games={newReleasedGames}/>
+                }
             </section>
             <section className="pt-16">
                 <div className="flex flex-row justify-between items-end mb-12">
                     <h1 className="text-4xl font-bold text-primary">Trending</h1>
                     <Link to={"/games?sort=trend"} className="text-secondary text-lg">See more</Link>
                 </div>
+                {
+                isTrendingGamesLoading && 
+                <div className="py-8 ">
+                    <LoadingAnimation/>
+                </div>
+                }
+                {
+                !isTrendingGamesLoading &&
                 <Carousel games={trendingGames}/>
+                }
             </section>
             <section className="pt-16">
                 <div className="flex flex-row justify-between items-end mb-12">
                     <h1 className="text-4xl font-bold text-primary">Highly Rated</h1>
                     <Link to={"/games?sort=rate"} className="text-secondary text-lg">See more</Link>
                 </div>
+                {
+                isHighRatedGamesLoading && 
+                <div className="py-8 ">
+                    <LoadingAnimation/>
+                </div>
+                }
+                {
+                !isHighRatedGamesLoading &&
                 <Carousel games={highRatedGames}/>
+                }
             </section>
         </div>
     );

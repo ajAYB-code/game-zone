@@ -1,6 +1,7 @@
 import React from "react";
 import { AiFillStar } from 'react-icons/ai';
 import './GameCard.css';
+import noGameImage from '../noGameImage.jpg';
 
 const GameCard = ({ width, game }) => {
 
@@ -12,7 +13,7 @@ const GameCard = ({ width, game }) => {
                 <span>{ game.rating }</span>
             </div>
             <div className="absolute inset-0">
-                <img src={ game.background_image } alt="" className="h-full w-full object-cover group-hover:scale-110 transition ease-in-out duration-300" />
+                <img src={ game.background_image || noGameImage } alt="" className="h-full w-full object-cover group-hover:scale-110 transition ease-in-out duration-300" />
             </div>
             <div className="px-4 pb-6 h-1/2 bg-gradient-to-t from-black absolute left-0 right-0 bottom-0 flex items-end">
                 <h1 className="game-title font-semibold mb-1/2 relative">{ game.name }</h1>
